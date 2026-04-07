@@ -12,6 +12,28 @@ This comprehensive guide contains all possible exam questions with detailed answ
 - [Unit III Questions](#unit-iii-controllers-blade--advanced-routing)
 - [Practical/Programming Questions](#practicalprogramming-questions)
 - [Quick Revision Notes](#quick-revision-notes)
+- [🔥 Additional Resources](#-additional-resources)
+
+---
+
+## 🔥 Additional Resources
+
+### Must-Study Documents:
+1. **[High-Probability Practical Questions](High_Probability_Practical_Questions.md)** - 100% expected exam patterns with complete solutions
+2. **[Viva Questions & Answers](Viva_Questions_Answers.md)** - 200+ viva questions with file locations
+
+### What's New:
+- ✅ 10 categories of practical questions with solutions
+- ✅ Cookie/Session complete examples
+- ✅ Array + View + Compact patterns
+- ✅ Route constraints with testing
+- ✅ Fallback + Group routing examples
+- ✅ Middleware logic implementations
+- ✅ Controller with constraints
+- ✅ Form validation complete examples
+- ✅ 200+ viva questions with answers
+- ✅ File location references
+- ✅ Common viva scenarios
 
 ---
 

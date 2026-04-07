@@ -21,6 +21,8 @@ Complete study materials for Laravel Units I-III, including detailed notes, code
 | Resource | Description | Link |
 |----------|-------------|------|
 | **Question Bank** | Complete exam questions with answers (Units I-III) | [View Questions](Laravel_Study_Notes/Exam_Preparation/README.md) |
+| **🔥 Practical Questions** | High-probability exam patterns with solutions | [View Practical](Laravel_Study_Notes/Exam_Preparation/High_Probability_Practical_Questions.md) |
+| **🎤 Viva Questions** | 200+ viva questions with file locations | [View Viva](Laravel_Study_Notes/Exam_Preparation/Viva_Questions_Answers.md) |
 | **Commands Reference** | All Artisan & Composer commands | [View Commands](Laravel_Study_Notes/Commands_Reference.md) |
 
 ---
@@ -61,13 +63,37 @@ Laravel_Study_Notes/
 │       └── Exam Questions
 │
 ├── Exam_Preparation/
-│   └── README.md
-│       ├── Unit I Questions (2, 5, 10 marks)
-│       ├── Unit II Questions (2, 5, 10 marks)
-│       ├── Unit III Questions (2, 5, 10 marks)
-│       ├── Practical/Programming Questions
-│       ├── Quick Revision Notes
-│       └── Exam Tips
+│   ├── README.md
+│   │   ├── Unit I Questions (2, 5, 10 marks)
+│   │   ├── Unit II Questions (2, 5, 10 marks)
+│   │   ├── Unit III Questions (2, 5, 10 marks)
+│   │   ├── Practical/Programming Questions
+│   │   ├── Quick Revision Notes
+│   │   └── Exam Tips
+│   ├── High_Probability_Practical_Questions.md
+│   │   ├── Cookie/Session Questions (5 variations)
+│   │   ├── Array + View + Compact (5 variations)
+│   │   ├── Routing + Constraints (5 variations)
+│   │   ├── Fallback + Group Routing (5 variations)
+│   │   ├── Middleware Logic (5 variations)
+│   │   ├── Controller + Constraints (7 variations)
+│   │   ├── Form + Validation (3 variations)
+│   │   ├── Redirect + Flash (5 variations)
+│   │   ├── Response Types (5 variations)
+│   │   └── Mixed Logic Questions (3 variations)
+│   └── Viva_Questions_Answers.md
+│       ├── Basic Laravel Questions (10)
+│       ├── File Structure & Folders (20)
+│       ├── Routing Questions (20)
+│       ├── Controller Questions (15)
+│       ├── Blade & Views Questions (20)
+│       ├── Middleware Questions (15)
+│       ├── Cookie & Session Questions (15)
+│       ├── Database & Migration Questions (15)
+│       ├── Artisan Commands Questions (10)
+│       ├── Validation Questions (10)
+│       ├── Advanced Questions (20)
+│       └── Practical Viva Scenarios (10)
 │
 └── Commands_Reference.md
     ├── Installation Commands
@@ -136,6 +162,8 @@ Laravel_Study_Notes/
 
 ### ✅ Exam Preparation
 - **75+ Questions** covering all units
+- **50+ Practical Questions** with complete solutions
+- **200+ Viva Questions** with file locations
 - Questions organized by marks (2, 5, 10)
 - Practical programming questions
 - Detailed answers with code examples

@@ -17,6 +17,7 @@
 ### What are Controllers?
 Controllers group related request handling logic into a single class. They store all logic for handling requests in one organized place.
 
+
 **Location:** `app/Http/Controllers/`
 
 ### Creating Controllers
