@@ -59,6 +59,7 @@ Route::get('/cookie/delete', function() {
 });
 ```
 
+
 **Testing Steps:**
 1. Visit: `http://localhost:8000/cookie/create` → Cookie created
 2. Visit: `http://localhost:8000/cookie/show` → Shows value
@@ -555,6 +556,7 @@ Route::middleware(['auth'])->group(function () {
 ### ✅ Question 4.3: Custom 404 page using fallback
 
 **Route:**
+
 ```php
 Route::fallback(function() {
     return view('errors.404');
