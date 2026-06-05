@@ -1,393 +1,69 @@
-# Laravel Study Notes - LPU
+# Laravel MVC Programming Study Suite (INT221)
 
-## 📚 Comprehensive Laravel Framework Study Guide
-
-Complete study materials for Laravel Units I-VI, including detailed notes, code examples, exam questions, and command references.
+Welcome to the ultimate, pro-level **Laravel study and practical exam resource center** built specifically for LPU students. This workspace has been organized to provide a complete learning path, combining theoretical depth, interview scenarios, viva preparation, and hands-on lab exercises.
 
 ---
 
-## 🎯 Quick Navigation
+## 🎯 Syllabus Unit Index
 
-### 📖 Study Materials
+Explore each unit of the curriculum. Every unit folder contains four dedicated guides: **Notes**, **Questions**, **Viva**, and **Practice**.
 
-| Unit | Topic | Link |
-|------|-------|------|
-| **Unit I** | Getting Started with MVC & Laravel Framework | [View Notes](Laravel_Study_Notes/Unit_I_Getting_Started/01_Getting_Started_MVC_Laravel.md) |
-| **Unit II** | Request, Routing & Responses | [View Notes](Laravel_Study_Notes/Unit_II_Request_Routing_Responses/02_Request_Routing_Responses.md) |
-| **Unit III** | Controllers, Blade & Advanced Routing | [View Notes](Laravel_Study_Notes/Unit_III_Controllers_Blade_Advanced_Routing/03_Controllers_Blade_Advanced_Routing.md) |
-| **Unit IV** | URL Generation, Request Data, Emails & Sessions | [View Notes](Laravel_Study_Notes/Unit_IV_URL_Generation_Request_Data_Emails_Sessions/04_URL_Generation_Request_Data_Emails_Sessions.md) |
-| **Unit V** | Form Validation & CSRF | [View Notes](Laravel_Study_Notes/Unit_V_Form_Validation/05_Form_Validation.md) |
-| **Unit VI** | Databases, Migrations, ORM & REST APIs | [View Notes](Laravel_Study_Notes/Unit_VI_Database_Migrations_Eloquent_API/06_Database_Migrations_Eloquent_API.md) |
+### [Unit 01: Getting Started](file:///d:/Temp/Laravel_LPU/Unit_01_Getting_Started)
+Covers MVC architecture, Laravel features, Composer dependency manager, installation walkthroughs, directory layout, and the Artisan CLI.
+*   📖 [Theory Notes](file:///d:/Temp/Laravel_LPU/Unit_01_Getting_Started/Notes.md)
+*   ❓ [Exam Questions (2, 5, 10 Marks)](file:///d:/Temp/Laravel_LPU/Unit_01_Getting_Started/Questions.md)
+*   🎤 [Viva prep & Troubleshooting](file:///d:/Temp/Laravel_LPU/Unit_01_Getting_Started/Viva.md)
+*   🧪 [Step-by-step Labs](file:///d:/Temp/Laravel_LPU/Unit_01_Getting_Started/Practice.md)
 
-### 📝 Exam Preparation
+### [Unit 02: Request, Routing & Responses](file:///d:/Temp/Laravel_LPU/Unit_02_Request_Routing_Responses)
+Covers the Laravel request lifecycle, basic routing, routing parameters & constraints, views, data passing, cookie attachment, JSON responses, and redirects.
+*   📖 [Theory Notes](file:///d:/Temp/Laravel_LPU/Unit_02_Request_Routing_Responses/Notes.md)
+*   ❓ [Exam Questions (2, 5, 10 Marks)](file:///d:/Temp/Laravel_LPU/Unit_02_Request_Routing_Responses/Questions.md)
+*   🎤 [Viva prep & Troubleshooting](file:///d:/Temp/Laravel_LPU/Unit_02_Request_Routing_Responses/Viva.md)
+*   🧪 [Step-by-step Labs](file:///d:/Temp/Laravel_LPU/Unit_02_Request_Routing_Responses/Practice.md)
 
-| Resource | Description | Link |
-|----------|-------------|------|
-| **Question Bank** | Complete exam questions with answers (Units I-III) | [View Questions](Laravel_Study_Notes/Exam_Preparation/README.md) |
-| **🔥 Practical Questions** | High-probability exam patterns with solutions | [View Practical](Laravel_Study_Notes/Exam_Preparation/High_Probability_Practical_Questions.md) |
-| **🎤 Viva Questions** | 200+ viva questions with file locations | [View Viva](Laravel_Study_Notes/Exam_Preparation/Viva_Questions_Answers.md) |
-| **Commands Reference** | All Artisan & Composer commands | [View Commands](Laravel_Study_Notes/Commands_Reference.md) |
+### [Unit 03: Controllers, Blade & Advanced Routing](file:///d:/Temp/Laravel_LPU/Unit_03_Controllers_Blade_Advanced_Routing)
+Covers basic & resource controllers, middleware binding, Blade templating layouts, template inheritance, route groups & prefixes, route model binding, and URL generation.
+*   📖 [Theory Notes](file:///d:/Temp/Laravel_LPU/Unit_03_Controllers_Blade_Advanced_Routing/Notes.md)
+*   ❓ [Exam Questions (2, 5, 10 Marks)](file:///d:/Temp/Laravel_LPU/Unit_03_Controllers_Blade_Advanced_Routing/Questions.md)
+*   🎤 [Viva prep & Troubleshooting](file:///d:/Temp/Laravel_LPU/Unit_03_Controllers_Blade_Advanced_Routing/Viva.md)
+*   🧪 [Step-by-step Labs](file:///d:/Temp/Laravel_LPU/Unit_03_Controllers_Blade_Advanced_Routing/Practice.md)
 
----
+### [Unit 04: URL Generation, Request Data, Emails & Sessions](file:///d:/Temp/Laravel_LPU/Unit_04_URL_Generation_Request_Data_Emails_Sessions)
+Covers form inputs, cookies, files retrieval, file uploads, configuring SMTP mail, Mailables, session CRUD, flash data, and localization.
+*   📖 [Theory Notes](file:///d:/Temp/Laravel_LPU/Unit_04_URL_Generation_Request_Data_Emails_Sessions/Notes.md)
+*   ❓ [Exam Questions (2, 5, 10 Marks)](file:///d:/Temp/Laravel_LPU/Unit_04_URL_Generation_Request_Data_Emails_Sessions/Questions.md)
+*   🎤 [Viva prep & Troubleshooting](file:///d:/Temp/Laravel_LPU/Unit_04_URL_Generation_Request_Data_Emails_Sessions/Viva.md)
+*   🧪 [Step-by-step Labs](file:///d:/Temp/Laravel_LPU/Unit_04_URL_Generation_Request_Data_Emails_Sessions/Practice.md)
 
-## 📂 Folder Structure
+### [Unit 05: Form Validation & CSRF Protection](file:///d:/Temp/Laravel_LPU/Unit_05_Form_Validation)
+Covers CSRF token checks, method field spoofing (PUT/PATCH/DELETE), controller validation rules, Form Requests classes, custom rule validation classes, and inline error/input repopulation.
+*   📖 [Theory Notes](file:///d:/Temp/Laravel_LPU/Unit_05_Form_Validation/Notes.md)
+*   ❓ [Exam Questions (2, 5, 10 Marks)](file:///d:/Temp/Laravel_LPU/Unit_05_Form_Validation/Questions.md)
+*   🎤 [Viva prep & Troubleshooting](file:///d:/Temp/Laravel_LPU/Unit_05_Form_Validation/Viva.md)
+*   🧪 [Step-by-step Labs](file:///d:/Temp/Laravel_LPU/Unit_05_Form_Validation/Practice.md)
 
-```
-Laravel_Study_Notes/
-│
-├── Unit_I_Getting_Started/
-│   └── 01_Getting_Started_MVC_Laravel.md
-│
-├── Unit_II_Request_Routing_Responses/
-│   └── 02_Request_Routing_Responses.md
-│
-├── Unit_III_Controllers_Blade_Advanced_Routing/
-│   └── 03_Controllers_Blade_Advanced_Routing.md
-│
-├── Unit_IV_URL_Generation_Request_Data_Emails_Sessions/
-│   └── 04_URL_Generation_Request_Data_Emails_Sessions.md
-│       ├── URL Generation & Shortcuts
-│       ├── Request Data & File Uploads
-│       ├── SMTP Email Configuration & Mailables
-│       ├── Localization translation matrices
-│       └── Session accessing, putting, deleting & flash
-│
-├── Unit_V_Form_Validation/
-│   └── 05_Form_Validation.md
-│       ├── CSRF token protection
-│       ├── Method field spoofing
-│       ├── Controller-based validation rules
-│       ├── Custom validation rule classes
-│       ├── Displaying errors globally & inline
-│       └── Old input values repopulation
-│
-├── Unit_VI_Database_Migrations_Eloquent_API/
-│   └── 06_Database_Migrations_Eloquent_API.md
-│       ├── Model configurations & Active Record
-│       ├── Migration structures, columns & schema keys
-│       ├── Seeding tables & factories
-│       ├── DB Query Builder vs Eloquent ORM
-│       ├── MongoDB configurations
-│       └── REST API Controllers returning JSON
-│
-├── Exam_Preparation/
-│   ├── README.md
-│   ├── High_Probability_Practical_Questions.md
-│   └── Viva_Questions_Answers.md
-│
-├── Code_Examples/
-│   └── README.md
-│
-└── Commands_Reference.md
-```
+### [Unit 06: Database Migrations, Eloquent ORM & REST APIs](file:///d:/Temp/Laravel_LPU/Unit_06_Database_Migrations_Eloquent_API)
+Covers models Active Record conventions, migrations columns & schema keys, DB Query Builder, database seeders, Model Factories (Faker), Eloquent relationships, MongoDB integrations, and JSON API resource controllers.
+*   📖 [Theory Notes](file:///d:/Temp/Laravel_LPU/Unit_06_Database_Migrations_Eloquent_API/Notes.md)
+*   ❓ [Exam Questions (2, 5, 10 Marks)](file:///d:/Temp/Laravel_LPU/Unit_06_Database_Migrations_Eloquent_API/Questions.md)
+*   🎤 [Viva prep & Troubleshooting](file:///d:/Temp/Laravel_LPU/Unit_06_Database_Migrations_Eloquent_API/Viva.md)
+*   🧪 [Step-by-step Labs](file:///d:/Temp/Laravel_LPU/Unit_06_Database_Migrations_Eloquent_API/Practice.md)
 
 ---
 
-## 🚀 Getting Started
+## ⚡ Quick Reference Sheets
 
-### For Students
+To speed up revision during last-minute preparations or in the lab, utilize these root-level resources:
 
-1. **Start with Unit I** - Understand MVC and Laravel basics
-2. **Progress to Unit II** - Learn routing and responses
-3. **Master Unit III** - Controllers, Blade, and advanced features
-4. **Practice with Exam Questions** - Test your knowledge
-5. **Use Commands Reference** - Quick lookup during coding
-
-### For Developers
-
-1. **Installation Section** - Set up Laravel environment
-2. **Commands Reference** - Essential Artisan commands
-3. **Code Examples** - Ready-to-use snippets
-4. **Best Practices** - Follow Laravel conventions
+1.  **[STUDY_GUIDE.md](file:///d:/Temp/Laravel_LPU/STUDY_GUIDE.md)**: Roadmap, checklists, syllabus outcomes mappings, and exam strategies.
+2.  **[Commands_Reference.md](file:///d:/Temp/Laravel_LPU/Commands_Reference.md)**: A complete cheatsheet of all Artisan, Composer, and Laravel helper command lines.
+3.  **[Quick_Reference_Card.md](file:///d:/Temp/Laravel_LPU/Quick_Reference_Card.md)**: A consolidated reference for code conventions, syntax shortcuts, and common design patterns.
 
 ---
 
-## 📋 What's Included
-
-### ✅ Unit I: Getting Started
-- MVC architecture explanation with diagrams
-- Laravel framework features and benefits
-- Composer dependency manager
-- Step-by-step installation guides (Windows/Linux/Mac)
-- Complete directory structure breakdown
-- Artisan CLI commands with examples
-- 20+ exam questions with answers
-
-### ✅ Unit II: Request, Routing & Responses
-- Complete request lifecycle flow
-- Basic and advanced routing techniques
-- Required and optional parameters
-- View creation and data passing methods
-- Response types (JSON, headers, cookies)
-- Redirection strategies
-- Flash messages and session data
-- 25+ exam questions with answers
-
-### ✅ Unit III: Controllers, Blade & Advanced Routing
-- Controller creation and organization
-- RESTful resource controllers
-- Middleware implementation
-- Blade templating engine (complete guide)
-- Template inheritance and components
-- Route groups, prefixes, domains
-- URL generation methods
-- 30+ exam questions with answers
-
-### ✅ Unit IV: URL Generation, Request Data, Emails & Sessions
-- Advanced URL generation helpers and asset loading
-- Form request input parsing, files and cookie data
-- Configuring mail environments and creating Mailables
-- Multi-language translation matrices for localization
-- Temporary/permanent session CRUD operations
-
-### ✅ Unit V: Form Validation & CSRF Protection
-- CSRF hidden checks and tokens
-- Method field spoofing (PUT/DELETE)
-- Form request validation validation arrays
-- Custom rule objects and custom messages
-- Repopulating form controls with old data
-
-### ✅ Unit VI: Databases, Migrations, ORM & REST APIs
-- Model configurations and conventions
-- Schema definitions, columns, keys and status tracking
-- Database seeders and Faker libraries
-- Eloquent ORM relationships and CRUD execution
-- REST APIs JSON routes and Resource controllers
-
-### ✅ Exam Preparation
-- **100+ Theory Questions** covering all 6 units
-- **75+ Practical Programming Questions** with complete solutions
-- **250+ Viva Questions** with file locations
-- Questions organized by marks (2, 5, 10)
-- Detailed answers with code examples
-- Quick revision notes
-- Exam tips and time management
-
-### ✅ Commands Reference
-- **120+ Commands** with explanations
-- Installation, setup, database seeding, rules and mail commands
-- Cache, queue and troubleshooting guides
-
----
-
-## 💡 Key Features
-
-### 🎓 Student-Friendly
-- Clear explanations with examples
-- Diagrams and flowcharts
-- Progressive learning path
-- Exam-focused content
-- Practice questions with solutions
-
-### 👨‍💻 Developer-Focused
-- Production-ready code examples
-- Best practices and conventions
-- Complete command reference
-- Troubleshooting guides
-- Real-world scenarios
-
-### 📱 Well-Organized
-- Logical folder structure
-- Easy navigation
-- Cross-references between topics
-- Quick access links
-- Searchable content
-
----
-
-## 🎯 Learning Objectives
-
-After completing these notes, you will be able to:
-
-### Unit I
-- ✅ Explain MVC architecture
-- ✅ Install and configure Laravel
-- ✅ Understand directory structure
-- ✅ Use Artisan commands effectively
-- ✅ Manage dependencies with Composer
-
-### Unit II
-- ✅ Define and manage routes
-- ✅ Pass data to views
-- ✅ Create different response types
-- ✅ Implement redirections
-- ✅ Understand request lifecycle
-
-### Unit III
-- ✅ Build controllers (basic & resource)
-- ✅ Apply middleware
-- ✅ Master Blade templating
-- ✅ Implement template inheritance
-- ✅ Use advanced routing features
-- ✅ Generate URLs programmatically
-
-### Unit IV
-- ✅ Retrieve and parse file uploads
-- ✅ Configure dynamic localization settings
-- ✅ Use SMTP environment variables to dispatch mailables
-- ✅ CRUD session records
-
-### Unit V
-- ✅ Authenticate submissions using CSRF tokens
-- ✅ Spoof PUT/DELETE requests using Method Field
-- ✅ Write Form Request validation arrays
-- ✅ Implement custom rule classes
-
-### Unit VI
-- ✅ Track version changes using migrations
-- ✅ Query databases using DB Query Builder
-- ✅ Construct Eloquent ORM relations (One-to-Many)
-- ✅ Develop API controllers returning JSON payloads
-
----
-
-## 📊 Exam Pattern Coverage
-
-### Question Types
-- **2-Mark Questions**: Definitions, basic concepts
-- **5-Mark Questions**: Explanations with examples
-- **10-Mark Questions**: Detailed descriptions, comparisons
-- **Practical Questions**: Code writing, problem-solving
-
-### Topics Weightage
-- Unit I: ~15%
-- Unit II: ~15%
-- Unit III: ~15%
-- Unit IV: ~15%
-- Unit V: ~20%
-- Unit VI: ~20%
-
----
-
-## 🔗 Useful Links
-
-### Official Resources
-- [Laravel Documentation](https://laravel.com/docs)
-- [Laravel News](https://laravel-news.com)
-- [Laracasts](https://laracasts.com)
-- [Composer Documentation](https://getcomposer.org/doc)
-
-### Community
-- [Laravel GitHub](https://github.com/laravel/laravel)
-- [Stack Overflow - Laravel](https://stackoverflow.com/questions/tagged/laravel)
-- [Laravel Reddit](https://www.reddit.com/r/laravel/)
-
----
-
-## 📝 How to Use These Notes
-
-### For Theory Preparation
-1. Read each unit sequentially
-2. Make notes of important points
-3. Practice diagram drawing
-4. Memorize key definitions
-5. Review exam questions
-
-### For Practical Preparation
-1. Set up Laravel environment
-2. Practice all commands
-3. Build sample applications
-4. Solve programming questions
-5. Test your code
-
-### Last-Minute Revision
-1. Review quick reference sections
-2. Go through command cheat sheets
-3. Practice important questions
-4. Review code examples
-5. Check exam tips
-
----
-
-## ⚡ Quick Start Commands
-
-```bash
-# Create new Laravel project
-composer create-project laravel/laravel myapp
-cd myapp
-
-# Setup environment
-cp .env.example .env
-php artisan key:generate
-
-# Start development server
-php artisan serve
-
-# Create controller
-php artisan make:controller UserController --resource
-
-# Create model with migration
-php artisan make:model Post -m
-
-# Run migrations
-php artisan migrate
-
-# List all routes
-php artisan route:list
-```
-
-For complete command reference, see: [Commands Reference](Laravel_Study_Notes/Commands_Reference.md)
-
----
-
-## 🌟 Tips for Success
-
-### Study Tips
-- 📅 Study regularly, don't cram
-- 💻 Practice coding daily
-- 📝 Write code by hand for exams
-- 🔄 Revise previous topics
-- ❓ Ask questions when stuck
-
-### Exam Tips
-- ⏰ Manage time wisely
-- 📖 Read questions carefully
-- ✍️ Write clear, structured answers
-- 💡 Include examples where possible
-- ✅ Review answers before submitting
-
-### Coding Tips
-- 🎯 Follow Laravel conventions
-- 🔒 Always validate input
-- 🛡️ Use CSRF protection
-- 📦 Keep controllers thin
-- 🧪 Test your code
-
----
-
-## 🤝 Contributing
-
-Found an error or have suggestions? Feel free to:
-- Report issues
-- Suggest improvements
-- Add more examples
-- Share additional resources
-
----
-
-## 📄 License
-
-These study notes are created for educational purposes. Feel free to use and share for learning.
-
----
-
-## 👨‍🏫 About
-
-Comprehensive Laravel study materials designed for LPU students covering Units I-VI of the Laravel framework curriculum.
-
-**Created with ❤️ for better learning**
-
----
-
-## 📞 Need Help?
-
-- Review the exam questions section
-- Check the commands reference
-- Practice with code examples
-- Refer to official Laravel documentation
-
----
-
-**Happy Learning! 🚀**
-
-*Last Updated: April 2026*
+## 🚀 Recommended Study Strategy
+1.  **Master Core Theory**: Read the `Notes.md` of each unit to get a solid grasp of architectural patterns (like MVC, Active Record, Request Lifecycle).
+2.  **Verify via Theory Questions**: Test your understanding by answering the questions in `Questions.md` (which mirror actual LPU exam paper weights: 2, 5, and 10 marks).
+3.  **Develop Muscle Memory**: Spin up a local environment and write the solutions from `Practice.md` by hand without copy-pasting to ensure command of Laravel syntax.
+4.  **Simulate Viva Conditions**: Review `Viva.md` scenarios to prepare for interview panels and troubleshoot common production bugs (like CSRF 419 exceptions or database locks).
