@@ -462,6 +462,13 @@ php artisan db:show
 php artisan db:monitor
 ```
 
+### Storage & Filesystem
+
+```bash
+# Create symbolic link from public/storage to storage/app/public
+php artisan storage:link
+```
+
 ### Tinker (Interactive Shell)
 
 ```bash

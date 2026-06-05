@@ -1,18 +1,18 @@
 # Laravel Study Guide - Complete Overview
 
-## 🎓 Your Complete Laravel Learning Path (Units I-III)
+## 🎓 Your Complete Laravel Learning Path (Units I-VI)
 
-This guide provides a structured approach to mastering Laravel framework concepts covered in Units I-III.
+This guide provides a structured approach to mastering Laravel framework concepts covered in Units I-VI.
 
 ---
 
 ## 📚 What's Included
 
 ### ✅ Comprehensive Study Materials
-- **3 Detailed Unit Guides** - Complete coverage of all topics
-- **75+ Exam Questions** - With detailed answers and explanations
-- **100+ Commands Reference** - All essential Artisan & Composer commands
-- **10+ Code Examples** - Working examples for practical learning
+- **6 Detailed Unit Guides** - Complete coverage of all topics
+- **120+ Exam Questions** - With detailed answers and explanations
+- **120+ Commands Reference** - All essential Artisan & Composer commands
+- **15+ Code Examples** - Working examples for practical learning
 - **Quick Reference Card** - Printable cheat sheet
 
 ### ✅ Perfect For
@@ -163,32 +163,132 @@ This guide provides a structured approach to mastering Laravel framework concept
 
 ---
 
+### Phase 4: Data Integration (Unit IV)
+**Estimated Time: 3-4 days**
+
+#### Topics to Master:
+1. **URL Generation**
+   - Generating standard framework URLs
+   - Named route mapping, Action URLs, Asset helper
+2. **Request Data**
+   - Retrieve input parameters, inputs parsing
+   - Uploading files, storage locations, symlinks
+   - Managing cookies in requests
+3. **Mailing System**
+   - SMTP configuration
+   - Creating and sending Mailable classes
+4. **Sessions & Localization**
+   - Setting dynamic languages runtime
+   - Accessing, storing, deleting session variables
+
+#### Practice Tasks:
+- [ ] Build a user profile form with avatar file upload
+- [ ] Implement language translation switches (EN/HI)
+- [ ] Configure Mailtrap and test dispatching welcome emails
+- [ ] Implement a session-based item list or cart
+
+#### Resources:
+- 📖 [Unit IV Notes](Unit_IV_URL_Generation_Request_Data_Emails_Sessions/04_URL_Generation_Request_Data_Emails_Sessions.md)
+- 📝 [Unit IV Questions](Exam_Preparation/README.md#unit-iv-url-generation-request-data-and-emails)
+- 💻 [Code Examples](Code_Examples/README.md#unit-iv-examples)
+
+---
+
+### Phase 5: Form Security & Validation (Unit V)
+**Estimated Time: 3-4 days**
+
+#### Topics to Master:
+1. **CSRF Protection**
+   - Cross-Site Request Forgery definition
+   - Generating token hidden fields via `@csrf`
+2. **Method field Spoofing**
+   - Bypassing HTML form action limits (PUT/DELETE)
+   - `@method()` directive usage
+3. **Form Validation**
+   - Writing controller-based `$request->validate()` rules
+   - Creating custom validation Form Request classes
+   - Rendering validation error messages dynamically
+   - Form repopulation with old values
+4. **Custom Rules**
+   - Generating validation rules via Artisan
+   - Implementing custom rule validation logic
+
+#### Practice Tasks:
+- [ ] Design a validated login/registration form
+- [ ] Build and register a custom Form Request validation class
+- [ ] Implement form controls repopulation using `old()`
+- [ ] Create a custom validation rule checking unique parameters
+
+#### Resources:
+- 📖 [Unit V Notes](Unit_V_Form_Validation/05_Form_Validation.md)
+- 📝 [Unit V Questions](Exam_Preparation/README.md#unit-v-laravel-form-validation)
+- 💻 [Code Examples](Code_Examples/README.md#unit-v-examples)
+
+---
+
+### Phase 6: Databases & REST APIs (Unit VI)
+**Estimated Time: 5-6 days**
+
+#### Topics to Master:
+1. **Migrations & Seeding**
+   - Schema builder syntax, columns, primary and foreign keys
+   - Running, rolling back, and resetting migrations
+   - Generating seeders and factories
+2. **Query Builder**
+   - DB facade operations (select, insert, update, delete)
+3. **Eloquent ORM**
+   - Active Record pattern conventions
+   - Eloquent CRUD execution
+   - Model relationships (One-to-Many)
+4. **MongoDB & APIs**
+   - Configuring NoSQL databases in Laravel
+   - Creating API routes and RESTful resource JSON payloads
+
+#### Practice Tasks:
+- [ ] Create posts and comments tables with migrations
+- [ ] Seed tables with mock items using Faker
+- [ ] Perform database CRUD operations using Query Builder and Eloquent
+- [ ] Develop a RESTful JSON API endpoint with full CRUD actions
+
+#### Resources:
+- 📖 [Unit VI Notes](Unit_VI_Database_Migrations_Eloquent_API/06_Database_Migrations_Eloquent_API.md)
+- 📝 [Unit VI Questions](Exam_Preparation/README.md#unit-vi-getting-started-with-databases)
+- 💻 [Code Examples](Code_Examples/README.md#unit-vi-examples)
+
+---
+
 ## 📅 Study Schedule
 
-### 10-Day Intensive Plan
+### 15-Day Intensive Plan
 
 | Day | Focus | Topics | Practice |
 |-----|-------|--------|----------|
-| 1 | Unit I | MVC, Laravel Intro | Install Laravel |
-| 2 | Unit I | Composer, Artisan | Practice commands |
-| 3 | Unit I | Directory Structure | Explore project |
-| 4 | Unit II | Request Lifecycle | Trace request flow |
-| 5 | Unit II | Routing | Create routes |
-| 6 | Unit II | Views & Responses | Build views |
-| 7 | Unit III | Controllers | Create controllers |
-| 8 | Unit III | Blade Templates | Design layouts |
-| 9 | Unit III | Advanced Routing | Build CRUD app |
-| 10 | Review | All Units | Practice questions |
+| 1 | Unit I | MVC, Laravel Intro | Install Laravel, Artisan commands |
+| 2 | Unit I | Directory Structure | Explore structure, files configurations |
+| 3 | Unit II | Request Lifecycle, Routing | Define routes, routing parameters |
+| 4 | Unit II | Views, Responses | Pass data to views, cookies & headers |
+| 5 | Unit III | Controllers | Basic & resource controller creation |
+| 6 | Unit III | Blade Templates | Blade layouts, template inheritance |
+| 7 | Unit III | Advanced Routing | Prefixes, routing groups, constraints |
+| 8 | Unit IV | Requests & Files | Retrieve request inputs, upload avatars |
+| 9 | Unit IV | Mail & Sessions | SMTP configuration, session storage |
+| 10 | Unit V | Forms & CSRF | Spoofing PUT/DELETE, CSRF tokens |
+| 11 | Unit V | Form Validation | Controller validation, Form Requests |
+| 12 | Unit VI | Database Migrations | Schema definitions, migration status |
+| 13 | Unit VI | Query Builder CRUD | Select, insert, update, delete via DB |
+| 14 | Unit VI | Eloquent ORM & APIs | Model relationships, RESTful controllers |
+| 15 | Review | Revision & Practicals | Review questions, mock practical tests |
 
-### 20-Day Comprehensive Plan
+### 30-Day Comprehensive Plan
 
 | Week | Focus | Activities |
 |------|-------|------------|
-| Week 1 | Unit I | Read notes, practice installation, learn Artisan |
-| Week 2 | Unit II | Master routing, views, responses |
-| Week 3 | Unit III Part 1 | Controllers, basic Blade |
-| Week 4 | Unit III Part 2 | Advanced routing, complete projects |
-| Week 5 | Review | Practice questions, mock tests |
+| Week 1 | Unit I & II | Install Laravel, explore folder layout, master routes and views. |
+| Week 2 | Unit II & III | Learn headers, cookies, controllers, Blade layouts and advanced routing. |
+| Week 3 | Unit IV | Master request parameters, file uploads, emails, sessions, and locales. |
+| Week 4 | Unit V | Practice CSRF, method spoofing, error rendering, and validation. |
+| Week 5 | Unit VI | Build migrations, seed databases, write Eloquent ORM CRUD and JSON APIs. |
+| Week 6 | Final Exam Prep | Practice high-probability questions, viva bank, and command cheatsheets. |
 
 ---
 
@@ -228,26 +328,27 @@ This guide provides a structured approach to mastering Laravel framework concept
 
 Based on typical exam patterns:
 
-### Unit I: ~30%
-- MVC Architecture: 10%
-- Laravel Features: 5%
-- Installation: 5%
-- Directory Structure: 5%
-- Artisan Commands: 5%
+### Units I-III: ~45%
+- MVC Architecture & Installation: 10%
+- Routing & Controllers: 15%
+- Blade Templating Engine: 10%
+- Advanced Routing & URLs: 10%
 
-### Unit II: ~35%
-- Request Lifecycle: 5%
-- Routing: 10%
-- Views: 8%
-- Responses: 7%
-- Redirections: 5%
+### Unit IV: ~15%
+- Request data, files & cookies: 5%
+- Sessions & Flash data: 5%
+- Mail & Localization: 5%
 
-### Unit III: ~35%
-- Controllers: 10%
-- Blade Templating: 10%
-- Resource Controllers: 5%
-- Advanced Routing: 5%
-- URL Generation: 5%
+### Unit V: ~20%
+- CSRF & Method Spoofing: 5%
+- Form validation rules & requests: 10%
+- Custom validation rules & old input: 5%
+
+### Unit VI: ~20%
+- Database schema migrations: 5%
+- Query Builder CRUD: 5%
+- Eloquent ORM & Relationships: 5%
+- REST APIs JSON endpoints: 5%
 
 ---
 
@@ -389,6 +490,13 @@ Before taking the exam, ensure you can:
 - [ ] Pass data to views
 - [ ] Create different responses
 - [ ] Perform redirections
+- [ ] Upload files and retrieve metadata (Unit IV)
+- [ ] Storing, retrieving, and deleting session keys (Unit IV)
+- [ ] Construct forms with CSRF and PUT/DELETE method directives (Unit V)
+- [ ] Setup Form Request validation classes with customized error messages (Unit V)
+- [ ] Setup database migrations and seeders (Unit VI)
+- [ ] Perform CRUD operations using DB Query Builder and Eloquent ORM (Unit VI)
+- [ ] Implement custom REST API controllers returning JSON (Unit VI)
 
 ### Code Writing Check
 - [ ] Write route definitions
@@ -399,6 +507,9 @@ Before taking the exam, ensure you can:
 - [ ] Create migrations
 - [ ] Use middleware
 - [ ] Generate URLs
+- [ ] Write file uploads and session manipulations
+- [ ] Implement custom validation rule validation methods
+- [ ] Write API routes and JSON response triggers
 
 ---
 
@@ -569,6 +680,9 @@ You now have everything you need to succeed:
 - [Unit I Notes](Unit_I_Getting_Started/01_Getting_Started_MVC_Laravel.md)
 - [Unit II Notes](Unit_II_Request_Routing_Responses/02_Request_Routing_Responses.md)
 - [Unit III Notes](Unit_III_Controllers_Blade_Advanced_Routing/03_Controllers_Blade_Advanced_Routing.md)
+- [Unit IV Notes](Unit_IV_URL_Generation_Request_Data_Emails_Sessions/04_URL_Generation_Request_Data_Emails_Sessions.md)
+- [Unit V Notes](Unit_V_Form_Validation/05_Form_Validation.md)
+- [Unit VI Notes](Unit_VI_Database_Migrations_Eloquent_API/06_Database_Migrations_Eloquent_API.md)
 - [Exam Questions](Exam_Preparation/README.md)
 - [Commands Reference](Commands_Reference.md)
 - [Code Examples](Code_Examples/README.md)

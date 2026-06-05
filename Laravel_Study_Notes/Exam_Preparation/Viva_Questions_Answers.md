@@ -18,6 +18,8 @@ Organized by topic with practical examples and folder locations.
 - [Artisan Commands Questions](#artisan-commands-questions)
 - [Validation Questions](#validation-questions)
 - [Advanced Questions](#advanced-questions)
+- [Email & Localization Questions](#email--localization-questions)
+- [REST API Questions](#rest-api-questions)
 
 ---
 
@@ -1120,6 +1122,127 @@ return view('cities', compact('cities'));
 // Returns 404 Not Found error
 // Example: /user/abc fails if constraint is [0-9]+
 ```
+
+---
+
+## Email & Localization Questions
+
+### Q181: How do you configure mail server settings in Laravel?
+**Answer:** In the `.env` file under keys starting with `MAIL_` (e.g., `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`).
+
+### Q182: What command generates a mailable class?
+**Answer:**
+```bash
+php artisan make:mail WelcomeEmail
+```
+
+### Q183: Where are generated mailable classes stored?
+**Answer:** `app/Mail/`
+
+### Q184: How are public variables in a mailable class used?
+**Answer:** Any public property defined in a Mailable class constructor is automatically available inside the corresponding Blade email view template.
+
+### Q185: How do you send a mail using the Mail facade?
+**Answer:**
+```php
+Mail::to($email)->send(new WelcomeEmail($data));
+```
+
+### Q186: Where are translation files stored for localization?
+**Answer:** In the root `lang/` directory or `resources/lang/` directory, structured in subfolders per language (e.g., `lang/en/`, `lang/hi/`).
+
+### Q187: How do you return a translated string in Blade?
+**Answer:** Using the double underscore helper function: `{{ __('messages.welcome') }}`.
+
+### Q188: How do you pass dynamic variables to a translation line?
+**Answer:** Pass an array as the second argument:
+```php
+__('messages.greet', ['name' => 'Amit'])
+```
+Inside the translation file: `'greet' => 'Hello, :name!'`.
+
+### Q189: How do you change the application locale dynamically?
+**Answer:** Using the service container locale selector:
+```php
+App::setLocale($lang);
+```
+
+### Q190: What is the default fallback language in Laravel?
+**Answer:** Configured in `config/app.php` under `'fallback_locale'`, typically set to `'en'`.
+
+---
+
+## REST API Questions
+
+### Q191: Where do you define API endpoints in Laravel?
+**Answer:** In the `routes/api.php` file.
+
+### Q192: What middleware is applied to routes in api.php by default?
+**Answer:** The `api` middleware group, which includes rate limiting and route model binding, but does not use cookies or CSRF validation.
+
+### Q193: What is the default URL prefix for routes in api.php?
+**Answer:** `/api` (e.g., a route `/users` is accessed at `http://domain.com/api/users`).
+
+### Q194: What command generates an API-specific controller?
+**Answer:**
+```bash
+php artisan make:controller Api/PostController --api
+```
+This generates a resource controller without the `create` and `edit` views.
+
+### Q195: How do you return a JSON response with status 201 Created?
+**Answer:**
+```php
+return response()->json(['data' => $item], 201);
+```
+
+### Q196: What is a Resource class in Laravel APIs?
+**Answer:** A layer that acts as a transformation layer between your Eloquent models and JSON responses:
+```bash
+php artisan make:resource UserResource
+```
+
+### Q197: How do you generate a collection of resources?
+**Answer:** Using the collection helper:
+```php
+return UserResource::collection(User::all());
+```
+
+---
+
+## Additional Cookie, Session, and Database Questions
+
+### Q198: What is the difference between session()->has() and session()->exists()?
+**Answer:**
+- `has()` checks if key is present **and its value is not null**.
+- `exists()` checks if key is present, **even if its value is null**.
+
+### Q199: How do you retrieve and immediately delete a session key?
+**Answer:** Using the `pull()` method:
+```php
+$value = session()->pull('key');
+```
+
+### Q200: How do you check if a cookie has been queued in the current request?
+**Answer:**
+```php
+Cookie::hasQueued('cookie_name');
+```
+
+### Q201: What error code represents CSRF verification failure?
+**Answer:** HTTP `419 Page Expired`.
+
+### Q202: How do you bypass CSRF verification for specific routes?
+**Answer:** Add the routes to the `$except` array in `app/Http/Middleware/VerifyCsrfToken.php`.
+
+### Q203: How do you define a One-to-Many relationship in Eloquent?
+**Answer:** Use `hasMany()` in the parent model and `belongsTo()` in the child model.
+
+### Q204: What is the database seeding command?
+**Answer:** `php artisan db:seed` or `php artisan migrate --seed`.
+
+### Q205: Can you connect MongoDB with Laravel models?
+**Answer:** Yes, by installing the `mongodb/laravel-mongodb` package and extending the MongoDB Eloquent Model class.
 
 ---
 

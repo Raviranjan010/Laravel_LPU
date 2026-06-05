@@ -2,7 +2,7 @@
 
 ## 📚 Comprehensive Laravel Framework Study Guide
 
-Complete study materials for Laravel Units I-III, including detailed notes, code examples, exam questions, and command references.
+Complete study materials for Laravel Units I-VI, including detailed notes, code examples, exam questions, and command references.
 
 ---
 
@@ -15,6 +15,9 @@ Complete study materials for Laravel Units I-III, including detailed notes, code
 | **Unit I** | Getting Started with MVC & Laravel Framework | [View Notes](Laravel_Study_Notes/Unit_I_Getting_Started/01_Getting_Started_MVC_Laravel.md) |
 | **Unit II** | Request, Routing & Responses | [View Notes](Laravel_Study_Notes/Unit_II_Request_Routing_Responses/02_Request_Routing_Responses.md) |
 | **Unit III** | Controllers, Blade & Advanced Routing | [View Notes](Laravel_Study_Notes/Unit_III_Controllers_Blade_Advanced_Routing/03_Controllers_Blade_Advanced_Routing.md) |
+| **Unit IV** | URL Generation, Request Data, Emails & Sessions | [View Notes](Laravel_Study_Notes/Unit_IV_URL_Generation_Request_Data_Emails_Sessions/04_URL_Generation_Request_Data_Emails_Sessions.md) |
+| **Unit V** | Form Validation & CSRF | [View Notes](Laravel_Study_Notes/Unit_V_Form_Validation/05_Form_Validation.md) |
+| **Unit VI** | Databases, Migrations, ORM & REST APIs | [View Notes](Laravel_Study_Notes/Unit_VI_Database_Migrations_Eloquent_API/06_Database_Migrations_Eloquent_API.md) |
 
 ### 📝 Exam Preparation
 
@@ -34,78 +37,48 @@ Laravel_Study_Notes/
 │
 ├── Unit_I_Getting_Started/
 │   └── 01_Getting_Started_MVC_Laravel.md
-│       ├── MVC Architecture
-│       ├── Laravel Overview & Features
-│       ├── Composer Introduction
-│       ├── Installation Guides
-│       ├── Directory Structure
-│       ├── Artisan CLI
-│       └── Exam Questions
 │
 ├── Unit_II_Request_Routing_Responses/
 │   └── 02_Request_Routing_Responses.md
-│       ├── Request Lifecycle
-│       ├── Basic Routing
-│       ├── Routing Parameters
-│       ├── Views & Data Passing
-│       ├── Responses (Headers, Cookies, JSON)
-│       ├── Redirections
-│       └── Exam Questions
 │
 ├── Unit_III_Controllers_Blade_Advanced_Routing/
 │   └── 03_Controllers_Blade_Advanced_Routing.md
-│       ├── Basic Controllers
-│       ├── Controller Routing & Middleware
-│       ├── RESTful Resource Controllers
-│       ├── Blade Templating Engine
-│       ├── Advanced Routing
-│       ├── URL Generation
-│       └── Exam Questions
+│
+├── Unit_IV_URL_Generation_Request_Data_Emails_Sessions/
+│   └── 04_URL_Generation_Request_Data_Emails_Sessions.md
+│       ├── URL Generation & Shortcuts
+│       ├── Request Data & File Uploads
+│       ├── SMTP Email Configuration & Mailables
+│       ├── Localization translation matrices
+│       └── Session accessing, putting, deleting & flash
+│
+├── Unit_V_Form_Validation/
+│   └── 05_Form_Validation.md
+│       ├── CSRF token protection
+│       ├── Method field spoofing
+│       ├── Controller-based validation rules
+│       ├── Custom validation rule classes
+│       ├── Displaying errors globally & inline
+│       └── Old input values repopulation
+│
+├── Unit_VI_Database_Migrations_Eloquent_API/
+│   └── 06_Database_Migrations_Eloquent_API.md
+│       ├── Model configurations & Active Record
+│       ├── Migration structures, columns & schema keys
+│       ├── Seeding tables & factories
+│       ├── DB Query Builder vs Eloquent ORM
+│       ├── MongoDB configurations
+│       └── REST API Controllers returning JSON
 │
 ├── Exam_Preparation/
 │   ├── README.md
-│   │   ├── Unit I Questions (2, 5, 10 marks)
-│   │   ├── Unit II Questions (2, 5, 10 marks)
-│   │   ├── Unit III Questions (2, 5, 10 marks)
-│   │   ├── Practical/Programming Questions
-│   │   ├── Quick Revision Notes
-│   │   └── Exam Tips
 │   ├── High_Probability_Practical_Questions.md
-│   │   ├── Cookie/Session Questions (5 variations)
-│   │   ├── Array + View + Compact (5 variations)
-│   │   ├── Routing + Constraints (5 variations)
-│   │   ├── Fallback + Group Routing (5 variations)
-│   │   ├── Middleware Logic (5 variations)
-│   │   ├── Controller + Constraints (7 variations)
-│   │   ├── Form + Validation (3 variations)
-│   │   ├── Redirect + Flash (5 variations)
-│   │   ├── Response Types (5 variations)
-│   │   └── Mixed Logic Questions (3 variations)
 │   └── Viva_Questions_Answers.md
-│       ├── Basic Laravel Questions (10)
-│       ├── File Structure & Folders (20)
-│       ├── Routing Questions (20)
-│       ├── Controller Questions (15)
-│       ├── Blade & Views Questions (20)
-│       ├── Middleware Questions (15)
-│       ├── Cookie & Session Questions (15)
-│       ├── Database & Migration Questions (15)
-│       ├── Artisan Commands Questions (10)
-│       ├── Validation Questions (10)
-│       ├── Advanced Questions (20)
-│       └── Practical Viva Scenarios (10)
+│
+├── Code_Examples/
+│   └── README.md
 │
 └── Commands_Reference.md
-    ├── Installation Commands
-    ├── Development Server
-    ├── Code Generation (Make Commands)
-    ├── Database Commands
-    ├── Cache Management
-    ├── Routing Commands
-    ├── Queue Commands
-    ├── Maintenance Mode
-    ├── Testing Commands
-    └── Troubleshooting
 ```
 
 ---
@@ -160,25 +133,40 @@ Laravel_Study_Notes/
 - URL generation methods
 - 30+ exam questions with answers
 
+### ✅ Unit IV: URL Generation, Request Data, Emails & Sessions
+- Advanced URL generation helpers and asset loading
+- Form request input parsing, files and cookie data
+- Configuring mail environments and creating Mailables
+- Multi-language translation matrices for localization
+- Temporary/permanent session CRUD operations
+
+### ✅ Unit V: Form Validation & CSRF Protection
+- CSRF hidden checks and tokens
+- Method field spoofing (PUT/DELETE)
+- Form request validation validation arrays
+- Custom rule objects and custom messages
+- Repopulating form controls with old data
+
+### ✅ Unit VI: Databases, Migrations, ORM & REST APIs
+- Model configurations and conventions
+- Schema definitions, columns, keys and status tracking
+- Database seeders and Faker libraries
+- Eloquent ORM relationships and CRUD execution
+- REST APIs JSON routes and Resource controllers
+
 ### ✅ Exam Preparation
-- **75+ Questions** covering all units
-- **50+ Practical Questions** with complete solutions
-- **200+ Viva Questions** with file locations
+- **100+ Theory Questions** covering all 6 units
+- **75+ Practical Programming Questions** with complete solutions
+- **250+ Viva Questions** with file locations
 - Questions organized by marks (2, 5, 10)
-- Practical programming questions
 - Detailed answers with code examples
 - Quick revision notes
 - Exam tips and time management
 
 ### ✅ Commands Reference
-- **100+ Commands** with explanations
-- Installation and setup commands
-- Code generation shortcuts
-- Database management
-- Cache operations
-- Queue management
-- Production deployment
-- Troubleshooting guide
+- **120+ Commands** with explanations
+- Installation, setup, database seeding, rules and mail commands
+- Cache, queue and troubleshooting guides
 
 ---
 
@@ -233,6 +221,24 @@ After completing these notes, you will be able to:
 - ✅ Use advanced routing features
 - ✅ Generate URLs programmatically
 
+### Unit IV
+- ✅ Retrieve and parse file uploads
+- ✅ Configure dynamic localization settings
+- ✅ Use SMTP environment variables to dispatch mailables
+- ✅ CRUD session records
+
+### Unit V
+- ✅ Authenticate submissions using CSRF tokens
+- ✅ Spoof PUT/DELETE requests using Method Field
+- ✅ Write Form Request validation arrays
+- ✅ Implement custom rule classes
+
+### Unit VI
+- ✅ Track version changes using migrations
+- ✅ Query databases using DB Query Builder
+- ✅ Construct Eloquent ORM relations (One-to-Many)
+- ✅ Develop API controllers returning JSON payloads
+
 ---
 
 ## 📊 Exam Pattern Coverage
@@ -244,9 +250,12 @@ After completing these notes, you will be able to:
 - **Practical Questions**: Code writing, problem-solving
 
 ### Topics Weightage
-- Unit I: ~30% (Foundation concepts)
-- Unit II: ~35% (Core functionality)
-- Unit III: ~35% (Advanced features)
+- Unit I: ~15%
+- Unit II: ~15%
+- Unit III: ~15%
+- Unit IV: ~15%
+- Unit V: ~20%
+- Unit VI: ~20%
 
 ---
 
@@ -364,7 +373,7 @@ These study notes are created for educational purposes. Feel free to use and sha
 
 ## 👨‍🏫 About
 
-Comprehensive Laravel study materials designed for LPU students covering Units I-III of the Laravel framework curriculum.
+Comprehensive Laravel study materials designed for LPU students covering Units I-VI of the Laravel framework curriculum.
 
 **Created with ❤️ for better learning**
 

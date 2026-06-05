@@ -10,6 +10,9 @@ Complete working examples for all topics covered in Units I-III.
 - [Unit I Examples](#unit-i-examples)
 - [Unit II Examples](#unit-ii-examples)
 - [Unit III Examples](#unit-iii-examples)
+- [Unit IV Examples](#unit-iv-examples)
+- [Unit V Examples](#unit-v-examples)
+- [Unit VI Examples](#unit-vi-examples)
 - [Complete Applications](#complete-applications)
 
 ---
@@ -840,9 +843,475 @@ Route::domain('api.myapp.com')->group(function () {
 
 ---
 
+## Unit IV Examples
+
+### Example 10: File Upload, Sessions, & Localization
+
+A practical application demonstrating file upload handling, session storage, and locale switching.
+
+**Route (`routes/web.php`):**
+```php
+use App\Http\Controllers\ProfileController;
+
+Route::middleware('web')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::post('/profile/upload', [ProfileController::class, 'upload'])->name('profile.upload');
+    Route::get('/locale/{lang}', [ProfileController::class, 'switchLang'])->name('locale.switch');
+    Route::post('/cart/add', [ProfileController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart/clear', [ProfileController::class, 'clearCart'])->name('cart.clear');
+});
+```
+
+**Controller (`app/Http/Controllers/ProfileController.php`):**
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+
+class ProfileController extends Controller
+{
+    public function show()
+    {
+        return view('profile');
+    }
+
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string|max:50',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('avatars', $fileName, 'public');
+
+            // Store file path and username in Session
+            session([
+                'username' => $request->input('username'),
+                'avatar_path' => '/storage/' . $path
+            ]);
+
+            return back()->with('success', 'Profile updated successfully!');
+        }
+
+        return back()->withErrors(['avatar' => 'Upload failed.']);
+    }
+
+    public function switchLang($lang)
+    {
+        if (in_array($lang, ['en', 'hi'])) {
+            session(['locale' => $lang]);
+        }
+        return back();
+    }
+
+    public function addToCart(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $cart = session()->get('cart', []);
+        $cart[] = $productId;
+        
+        session()->put('cart', $cart);
+
+        return back()->with('success', 'Item added to session-based cart!');
+    }
+
+    public function clearCart()
+    {
+        session()->forget('cart');
+        return back()->with('success', 'Cart cleared from session.');
+    }
+}
+```
+
+**Blade View (`resources/views/profile.blade.php`):**
+```blade
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile, Sessions & Localization</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="p-5">
+    <div class="container max-w-md">
+        <!-- Lang switcher -->
+        <div class="text-end mb-4">
+            <a href="{{ route('locale.switch', 'en') }}" class="btn btn-sm btn-outline-primary">English</a>
+            <a href="{{ route('locale.switch', 'hi') }}" class="btn btn-sm btn-outline-danger">हिंदी</a>
+        </div>
+
+        <h3>{{ __('messages.welcome') }}</h3>
+
+        <!-- Profile display using sessions -->
+        @if(session()->has('username'))
+            <div class="card mb-4 p-3 text-center">
+                <img src="{{ asset(session('avatar_path')) }}" class="rounded-circle mx-auto" style="width: 100px; height: 100px; object-fit: cover;">
+                <h4>{{ session('username') }}</h4>
+            </div>
+        @endif
+
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        <form action="{{ route('profile.upload') }}" method="POST" enctype="multipart/form-data" class="card p-4">
+            @csrf
+            <div class="mb-3">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" value="{{ old('username') }}">
+                @error('username') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+            <div class="mb-3">
+                <label>Avatar Image</label>
+                <input type="file" name="avatar" class="form-control">
+                @error('avatar') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+            <button type="submit" class="btn btn-success">Upload and Set Session</button>
+        </form>
+
+        <hr class="my-5">
+
+        <h4>Session Cart (Count: {{ count(session('cart', [])) }})</h4>
+        <ul>
+            @foreach(session('cart', []) as $item)
+                <li>Product ID: {{ $item }}</li>
+            @endforeach
+        </ul>
+        <form action="{{ route('cart.add') }}" method="POST" class="d-inline">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ rand(100, 999) }}">
+            <button class="btn btn-sm btn-primary">Add Random Item</button>
+        </form>
+        <a href="{{ route('cart.clear') }}" class="btn btn-sm btn-danger">Clear Cart</a>
+    </div>
+</body>
+</html>
+```
+
+---
+
+## Unit V Examples
+
+### Example 11: Form Request Validation & Custom Rule
+
+Demonstrates advanced validation handling using standard rules, customized messages, and a custom Artisan rule class.
+
+**Command to generate custom rule:**
+```bash
+php artisan make:rule Uppercase
+```
+
+**Custom Rule Class (`app/Rules/Uppercase.php`):**
+```php
+<?php
+
+namespace App\Rules;
+
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
+
+class Uppercase implements ValidationRule
+{
+    public function validate(string $attribute, mixed $value, Closure $fail): void
+    {
+        if (strtoupper($value) !== $value) {
+            $fail("The :attribute field must be strictly uppercase.");
+        }
+    }
+}
+```
+
+**Form Request (`app/Http/Requests/RegisterRequest.php`):**
+```php
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Uppercase;
+
+class RegisterRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'username' => ['required', 'string', 'min:3', new Uppercase],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'username.required' => 'We need to know your username!',
+            'email.unique' => 'This email belongs to another registered account.',
+        ];
+    }
+}
+```
+
+**Controller Handler (`app/Http/Controllers/AuthController.php`):**
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\RegisterRequest;
+use App\Models\User;
+
+class AuthController extends Controller
+{
+    public function showForm()
+    {
+        return view('auth.register');
+    }
+
+    public function process(RegisterRequest $request)
+    {
+        // Data is already validated automatically
+        $validated = $request->validated();
+
+        User::create([
+            'name' => $validated['username'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+        ]);
+
+        return redirect('/login')->with('success', 'Registration complete!');
+    }
+}
+```
+
+---
+
+## Unit VI Examples
+
+### Example 12: Database Migrations, Seeding, and Query Builder
+
+Demonstrates schema setup, database seeding with factory, and CRUD queries using the `DB` facade.
+
+**Migration (`database/migrations/2026_06_05_000000_create_products_table.php`):**
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up()
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->decimal('price', 8, 2);
+            $table->integer('stock');
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('products');
+    }
+};
+```
+
+**Seeder (`database/seeders/ProductSeeder.php`):**
+```php
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class ProductSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('products')->insert([
+            ['name' => 'Laptop', 'price' => 74999.00, 'stock' => 15, 'created_at' => now()],
+            ['name' => 'Smart Phone', 'price' => 24999.00, 'stock' => 30, 'created_at' => now()],
+            ['name' => 'Headphones', 'price' => 1999.00, 'stock' => 50, 'created_at' => now()],
+        ]);
+    }
+}
+```
+
+**Query Builder Controller (`app/Http/Controllers/ProductQueryController.php`):**
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class ProductQueryController extends Controller
+{
+    public function index()
+    {
+        // Retrieve products with stock > 0
+        $products = DB::table('products')
+            ->where('stock', '>', 0)
+            ->orderBy('price', 'asc')
+            ->get();
+
+        return view('products.index', compact('products'));
+    }
+
+    public function create(Request $request)
+    {
+        // Insert product
+        DB::table('products')->insert([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'stock' => $request->input('stock'),
+            'created_at' => now()
+        ]);
+
+        return back()->with('success', 'Product inserted via Query Builder!');
+    }
+
+    public function updatePrice($id, Request $request)
+    {
+        // Update product price
+        DB::table('products')
+            ->where('id', $id)
+            ->update(['price' => $request->input('price')]);
+
+        return back()->with('success', 'Price updated.');
+    }
+
+    public function destroy($id)
+    {
+        // Delete product
+        DB::table('products')->where('id', $id)->delete();
+        return back()->with('success', 'Product deleted.');
+    }
+}
+```
+
+### Example 13: Eloquent ORM & REST API Controller
+
+Demonstrates Eloquent model definitions, one-to-many relationships, and creating standard API controllers with JSON outputs.
+
+**Eloquent Models:**
+```php
+// app/Models/Author.php
+class Author extends Model
+{
+    protected $fillable = ['name', 'bio'];
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
+}
+
+// app/Models/Book.php
+class Book extends Model
+{
+    protected $fillable = ['title', 'isbn', 'author_id'];
+
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
+}
+```
+
+**API Route (`routes/api.php`):**
+```php
+use App\Http\Controllers\Api\BookApiController;
+
+Route::apiResource('books', BookApiController::class);
+```
+
+**API Controller (`app/Http/Controllers/Api/BookApiController.php`):**
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\Book;
+use Illuminate\Http\Request;
+
+class BookApiController extends Controller
+{
+    public function index()
+    {
+        // Retrieve books with author relationship loaded
+        $books = Book::with('author')->get();
+        return response()->json(['success' => true, 'data' => $books], 200);
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'isbn' => 'required|string|unique:books,isbn',
+            'author_id' => 'required|exists:authors,id'
+        ]);
+
+        $book = Book::create($validated);
+        return response()->json(['success' => true, 'message' => 'Book created!', 'data' => $book], 201);
+    }
+
+    public function show($id)
+    {
+        $book = Book::with('author')->find($id);
+
+        if (!$book) {
+            return response()->json(['success' => false, 'message' => 'Book not found'], 404);
+        }
+
+        return response()->json(['success' => true, 'data' => $book], 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $book = Book::find($id);
+
+        if (!$book) {
+            return response()->json(['success' => false, 'message' => 'Book not found'], 404);
+        }
+
+        $book->update($request->all());
+        return response()->json(['success' => true, 'message' => 'Book updated!', 'data' => $book], 200);
+    }
+
+    public function destroy($id)
+    {
+        $deleted = Book::destroy($id);
+
+        if (!$deleted) {
+            return response()->json(['success' => false, 'message' => 'Book not found'], 404);
+        }
+
+        return response()->json(['success' => true, 'message' => 'Book removed.'], 200);
+    }
+}
+```
+
+---
+
 ## Complete Applications
 
-### Example 10: Simple Blog Application
+### Example 14: Simple Blog Application
 
 **Complete structure for a blog with CRUD operations.**
 

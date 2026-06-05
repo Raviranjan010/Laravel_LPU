@@ -1,6 +1,6 @@
 # Laravel Exam Preparation Guide
 
-## 📚 Complete Question Bank (Units I-III)
+## 📚 Complete Question Bank (Units I-VI)
 
 This comprehensive guide contains all possible exam questions with detailed answers, organized by difficulty and topic.
 
@@ -10,6 +10,9 @@ This comprehensive guide contains all possible exam questions with detailed answ
 - [Unit I Questions](#unit-i-getting-started-with-mvc-laravel-framework)
 - [Unit II Questions](#unit-ii-request-routing--responses)
 - [Unit III Questions](#unit-iii-controllers-blade--advanced-routing)
+- [Unit IV Questions](#unit-iv-url-generation-request-data-and-emails)
+- [Unit V Questions](#unit-v-laravel-form-validation)
+- [Unit VI Questions](#unit-vi-getting-started-with-databases)
 - [Practical/Programming Questions](#practicalprogramming-questions)
 - [Quick Revision Notes](#quick-revision-notes)
 - [🔥 Additional Resources](#-additional-resources)
@@ -1286,6 +1289,400 @@ Route::bind('user', function($value) {
 **Secure Routes:**
 ```php
 Route::get('/payment', function() {})->secure();
+```
+
+---
+
+## Unit IV: URL Generation, Request Data, and Emails
+
+### 2-Mark Questions
+
+#### Q49: List two URL generation helpers in Laravel.
+**Answer:**
+1. `url()` - Generates basic URLs to standard paths.
+2. `route()` - Generates URLs for specific named routes.
+
+#### Q50: How do you verify if a request input field is present and not empty?
+**Answer:**
+Use the `filled()` method on the `Request` object:
+```php
+if ($request->filled('username')) {
+    // field is present and not empty
+}
+```
+
+#### Q51: Write code to retrieve the current URL with query parameters.
+**Answer:**
+```php
+$currentUrl = url()->full();
+```
+
+#### Q52: What does `session()->pull()` do?
+**Answer:**
+It retrieves the specified value from the session and deletes it in a single, atomic operation.
+
+#### Q53: Write the syntax to set the dynamic locale in Laravel.
+**Answer:**
+```php
+use Illuminate\Support\Facades\App;
+
+App::setLocale($lang); // where $lang can be 'en', 'hi', etc.
+```
+
+### 5-Mark Questions
+
+#### Q54: Explain file upload management in Laravel.
+**Answer:**
+To handle uploaded files, first make sure the HTML form uses `enctype="multipart/form-data"`. In the controller, you can use the `Request` object:
+
+1. **Verify if file exists:**
+   ```php
+   if ($request->hasFile('avatar')) { ... }
+   ```
+2. **Access file metadata:**
+   ```php
+   $file = $request->file('avatar');
+   $ext = $file->getClientOriginalExtension();
+   ```
+3. **Store the file:**
+   ```php
+   $path = $file->storeAs('avatars', 'avatar_image.' . $ext, 'public');
+   ```
+This stores the file in `storage/app/public/avatars`. To make it accessible to visitors, link public files using `php artisan storage:link`.
+
+#### Q55: Explain session management in Laravel with code examples.
+**Answer:**
+Sessions store client state across requests.
+1. **Storing data:**
+   ```php
+   session(['user_id' => 12]);
+   // or
+   $request->session()->put('role', 'admin');
+   ```
+2. **Retrieving data:**
+   ```php
+   $userId = session('user_id');
+   $role = $request->session()->get('role', 'default');
+   ```
+3. **Deleting data:**
+   ```php
+   session()->forget('user_id'); // Delete specific key
+   session()->flush(); // Delete everything
+   ```
+4. **Flash data:** Available only for the next request:
+   ```php
+   $request->session()->flash('message', 'Updated successfully!');
+   ```
+
+#### Q56: Write a PHP script to send a WelcomeEmail.
+**Answer:**
+First, create a mailable: `php artisan make:mail WelcomeEmail`.
+
+**Mailable (`app/Mail/WelcomeEmail.php`):**
+```php
+class WelcomeEmail extends Mailable {
+    use Queueable, SerializesModels;
+    public $user;
+    public function __construct($user) { $this->user = $user; }
+    public function envelope() {
+        return new Envelope(subject: 'Welcome to our platform!');
+    }
+    public function content() {
+        return new Content(view: 'emails.welcome');
+    }
+}
+```
+
+**Dispatch in Controller:**
+```php
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeEmail;
+
+Mail::to($user['email'])->send(new WelcomeEmail($user));
+```
+
+### 10-Mark Questions
+
+#### Q57: Describe Laravel Localization architecture. Design a dynamic welcome page system in English and Hindi.
+**Answer:**
+Laravel's localization translates interface elements into other languages. Language directories are placed in `lang/` (or `resources/lang/`).
+
+**Step 1: Directories & Files Setup:**
+- English (`lang/en/messages.php`):
+  ```php
+  return ['welcome' => 'Welcome to our application!'];
+  ```
+- Hindi (`lang/hi/messages.php`):
+  ```php
+  return ['welcome' => 'हमारे एप्लिकेशन में आपका स्वागत है!'];
+  ```
+
+**Step 2: Dynamic Route to set language:**
+```php
+Route::get('/language/{lang}', function($lang) {
+    if (in_array($lang, ['en', 'hi'])) {
+        session(['locale' => $lang]);
+    }
+    return redirect()->back();
+});
+```
+
+**Step 3: Middleware (`SetLocale.php`):**
+```php
+public function handle(Request $request, Closure $next) {
+    if (session()->has('locale')) {
+        App::setLocale(session('locale'));
+    }
+    return $next($request);
+}
+```
+*Register this in `app/Http/Kernel.php` under `$middlewareGroups['web']`.*
+
+**Step 4: Blade layout view implementation:**
+```blade
+<div>
+    <a href="/language/en">English</a> | <a href="/language/hi">हिंदी</a>
+    <h1>{{ __('messages.welcome') }}</h1>
+</div>
+```
+
+---
+
+## Unit V: Laravel Form Validation
+
+### 2-Mark Questions
+
+#### Q58: What is CSRF and how does Laravel protect against it?
+**Answer:**
+CSRF (Cross-Site Request Forgery) is an exploit where malicious websites send unauthorized actions on behalf of authenticated users. Laravel protects forms by generating a CSRF token for each active session and requiring forms to submit it via `@csrf`.
+
+#### Q59: Why is `@method('PUT')` used in Laravel forms?
+**Answer:**
+Standard web browsers do not support PUT, PATCH, or DELETE methods inside the `<form>` element. `@method('PUT')` creates a hidden input that tells Laravel to treat the POST request as a PUT request.
+
+#### Q60: Write a validation rule validating that `email` is required, unique, and has an email format.
+**Answer:**
+```php
+'email' => 'required|email|unique:users,email'
+```
+
+#### Q61: What is the purpose of the `old()` helper function?
+**Answer:**
+It displays the input values submitted in a previous failed request, so the user doesn't have to retype them when validation errors occur.
+
+### 5-Mark Questions
+
+#### Q62: Explain how validation errors are caught and shown in Blade.
+**Answer:**
+When validation fails, errors are flashed to the session and loaded into the `$errors` variable.
+
+1. **Global display (all errors):**
+   ```blade
+   @if ($errors->any())
+       <ul>
+           @foreach ($errors->all() as $error)
+               <li>{{ $error }}</li>
+           @endforeach
+       </ul>
+   @endif
+   ```
+2. **Inline display (specific field):**
+   ```blade
+   <input type="text" name="email" value="{{ old('email') }}">
+   @error('email')
+       <span class="text-danger">{{ $message }}</span>
+   @enderror
+   ```
+
+#### Q63: Create a custom validation rule class `Uppercase`.
+**Answer:**
+1. Generate the rule: `php artisan make:rule Uppercase`
+2. Edit `app/Rules/Uppercase.php`:
+   ```php
+   namespace App\Rules;
+   use Closure;
+   use Illuminate\Contracts\Validation\ValidationRule;
+   class Uppercase implements ValidationRule {
+       public function validate(string $attribute, mixed $value, Closure $fail): void {
+           if (strtoupper($value) !== $value) {
+               $fail("The :attribute field must be uppercase.");
+           }
+       }
+   }
+   ```
+3. Use in controller validation:
+   ```php
+   $request->validate(['name' => ['required', new Uppercase]]);
+   ```
+
+### 10-Mark Questions
+
+#### Q64: Compare controller-based validation with Form Requests. Illustrate with a detailed Form Request class.
+**Answer:**
+*   **Controller-based validation (`$request->validate()`):** Fast and convenient for small forms, but clutters controllers with validation logic.
+*   **Form Request Validation:** Moves rules into standalone classes, keeping controllers clean and adhering to Separation of Concerns.
+
+**Custom Form Request (`app/Http/Requests/StoreUserRequest.php`):**
+```php
+namespace App\Http\Requests;
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreUserRequest extends FormRequest {
+    public function authorize(): bool {
+        return true; // Set to true to allow access
+    }
+
+    public function rules(): array {
+        return [
+            'username' => 'required|string|min:4|unique:users',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed'
+        ];
+    }
+
+    public function messages(): array {
+        return [
+            'username.required' => 'A unique username is mandatory.',
+            'password.confirmed' => 'Passwords do not match.'
+        ];
+    }
+}
+```
+
+**Controller integration:**
+```php
+public function store(StoreUserRequest $request) {
+    $validated = $request->validated();
+    User::create($validated);
+    return redirect()->route('users.index');
+}
+```
+
+---
+
+## Unit VI: Getting Started with Databases
+
+### 2-Mark Questions
+
+#### Q65: What is the Active Record pattern?
+**Answer:**
+An architectural design pattern where each model class represents a database table, and an instance of that class represents a single table row, wrapping database access and business logic.
+
+#### Q66: Write the command to run migrations and seed database in one step.
+**Answer:**
+```bash
+php artisan migrate:fresh --seed
+```
+
+#### Q67: Write Query Builder script to select all posts with status 'published'.
+**Answer:**
+```php
+$posts = DB::table('posts')->where('status', 'published')->get();
+```
+
+#### Q68: What is a database seeder?
+**Answer:**
+An automated class in Laravel (`database/seeders`) used to populate tables with initial dummy test records or essential configuration data.
+
+#### Q69: Which package connects Laravel models to MongoDB?
+**Answer:**
+The `mongodb/laravel-mongodb` package.
+
+### 5-Mark Questions
+
+#### Q70: Explain migration architecture in Laravel.
+**Answer:**
+Migrations act as version control for database schemas.
+- **`up()` Method:** Executed when migrations are run (`php artisan migrate`) to create tables and fields.
+- **`down()` Method:** Executed when rolling back (`php artisan migrate:rollback`) to drop tables and restore the previous state.
+
+Example structure:
+```php
+Schema::create('books', function (Blueprint $table) {
+    $table->id();
+    $table->string('title');
+    $table->decimal('price', 8, 2);
+    $table->timestamps();
+});
+```
+
+#### Q71: Differentiate between Eloquent ORM and Query Builder.
+**Answer:**
+
+| Feature | Query Builder | Eloquent ORM |
+|---------|---------------|--------------|
+| **Approach** | Fluent API (`DB` facade) | Active Record (Model classes) |
+| **Response** | returns StdClass objects | returns Eloquent Model instances |
+| **Speed** | Faster, less memory | Marginally slower, instantiates classes |
+| **Relations** | requires writing SQL joins | automatically mapped via methods |
+
+#### Q72: Explain one-to-many relationships in Eloquent.
+**Answer:**
+A One-to-Many relationship defines a model owning multiple children (e.g., User has many Posts).
+- **Parent Model (`User.php`):**
+  ```php
+  public function posts() {
+      return $this->hasMany(Post::class);
+  }
+  ```
+- **Child Model (`Post.php`):**
+  ```php
+  public function user() {
+      return $this->belongsTo(User::class);
+  }
+  ```
+- **Usage:**
+  ```php
+  $posts = User::find(1)->posts;
+  ```
+
+### 10-Mark Questions
+
+#### Q73: Explain REST API architecture. Write a RESTful Book API controller handling full CRUD actions returning JSON.
+**Answer:**
+REST (Representational State Transfer) uses standard HTTP verbs to interact with resources (GET to read, POST to create, PUT to update, DELETE to remove).
+
+**API Routing (`routes/api.php`):**
+```php
+Route::apiResource('books', BookController::class);
+```
+
+**API Controller (`app/Http/Controllers/BookController.php`):**
+```php
+namespace App\Http\Controllers;
+use App\Models\Book;
+use Illuminate\Http\Request;
+
+class BookController extends Controller {
+    public function index() {
+        return response()->json(['success' => true, 'data' => Book::all()], 200);
+    }
+
+    public function store(Request $request) {
+        $data = $request->validate(['title' => 'required', 'isbn' => 'required']);
+        $book = Book::create($data);
+        return response()->json(['success' => true, 'data' => $book], 201);
+    }
+
+    public function show($id) {
+        $book = Book::find($id);
+        if (!$book) return response()->json(['success' => false], 404);
+        return response()->json(['success' => true, 'data' => $book], 200);
+    }
+
+    public function update(Request $request, $id) {
+        $book = Book::find($id);
+        if (!$book) return response()->json(['success' => false], 404);
+        $book->update($request->all());
+        return response()->json(['success' => true, 'data' => $book], 200);
+    }
+
+    public function destroy($id) {
+        $deleted = Book::destroy($id);
+        if (!$deleted) return response()->json(['success' => false], 404);
+        return response()->json(['success' => true, 'message' => 'Book deleted'], 200);
+    }
+}
 ```
 
 ---

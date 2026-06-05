@@ -353,32 +353,55 @@ DELETE  /posts/{id}      → destroy()
 
 ### Validation
 ```php
+// Standard validation
 $validated = $request->validate([
     'title' => 'required|string|max:255',
     'email' => 'required|email|unique:users',
-    'age' => 'required|integer|min:18',
+], [
+    'email.required' => 'Custom error message here.'
+]);
+
+// Custom validation rule usage
+$request->validate([
+    'license' => ['required', new UppercaseRule],
 ]);
 ```
 
-### Eloquent Queries
+### Sessions & File Uploads
 ```php
-// Get all
-User::all();
+// Sessions
+session(['key' => 'value']);       // Store
+$value = session('key');           // Retrieve
+session()->forget('key');          // Delete specific key
+$val = session()->pull('key');     // Retrieve and delete
+session()->flash('msg', 'Hi');     // Flash for next request only
 
-// Find by ID
-User::find(1);
+// File Uploads
+if ($request->hasFile('avatar')) {
+    $path = $request->file('avatar')->storeAs('avatars', 'name.png', 'public');
+}
+```
 
-// Where clause
-User::where('active', 1)->get();
+### Eloquent & Query Builder Queries
+```php
+// Eloquent Queries
+User::all();                       // Get all
+User::find(1);                     // Find by ID
+User::where('active', 1)->get();   // Where clause
+User::create(['name' => 'John']);  // Create
+$user->update(['name' => 'Jane']); // Update
+$user->delete();                   // Delete
 
-// Create
-User::create(['name' => 'John']);
+// Relationships
+public function posts() { return $this->hasMany(Post::class); } // One-to-Many
+public function user() { return $this->belongsTo(User::class); }
 
-// Update
-$user->update(['name' => 'Jane']);
-
-// Delete
-$user->delete();
+// Query Builder Queries
+DB::table('users')->get();
+DB::table('users')->where('id', 1)->first();
+DB::table('users')->insert(['name' => 'John']);
+DB::table('users')->where('id', 1)->update(['name' => 'Jane']);
+DB::table('users')->where('id', 1)->delete();
 ```
 
 ---
@@ -408,16 +431,19 @@ $user->delete();
 Before exam, ensure you can:
 - [ ] Explain MVC architecture
 - [ ] Install Laravel project
-- [ ] Create routes with parameters
-- [ ] Build controllers (basic & resource)
-- [ ] Use Blade templating
-- [ ] Pass data to views
-- [ ] Create different responses
-- [ ] Apply middleware
-- [ ] Implement template inheritance
-- [ ] Use route groups
-- [ ] Generate URLs
-- [ ] Write CRUD operations
+- [ ] Create routes with parameters and constraints
+- [ ] Build controllers (basic, resource, and API)
+- [ ] Use Blade templates and layouts inheritance
+- [ ] Share data with all views
+- [ ] Pass cookies and custom headers in responses
+- [ ] Redirect to named routes and controller actions
+- [ ] Upload files and manage storage symlinks (Unit IV)
+- [ ] Maintain session keys (has, put, forget, pull, flash) (Unit IV)
+- [ ] Protect forms with CSRF and PUT/DELETE spoofing (Unit V)
+- [ ] Validate requests with custom Form Requests and rules (Unit V)
+- [ ] Manage databases using migrations and seeders (Unit VI)
+- [ ] Build CRUD using Query Builder and Eloquent ORM (Unit VI)
+- [ ] Create REST API resources and JSON payloads (Unit VI)
 
 ---
 

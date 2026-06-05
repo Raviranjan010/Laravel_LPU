@@ -18,6 +18,7 @@ This document contains **100% practical solutions** for all expected exam questi
 - [9. Response Types](#9-response-types)
 - [10. Mixed Logic Questions](#10-mixed-logic-questions)
 - [Specific Exam Questions Solutions](#specific-exam-questions-solutions)
+- [Unit IV-VI Practical Questions](#unit-iv-vi-practical-questions)
 
 ---
 
@@ -1354,6 +1355,217 @@ Route::get('/alphanum/{value}', [ConstraintController::class, 'Alphanum'])
 // Fixed length constraint (6 digits)
 Route::get('/uid/{uid}', [ConstraintController::class, 'uid'])
     ->where('uid', '[0-9]{6}');
+```
+
+---
+
+### 🎯 Q7: User Registration Form with Validation, Custom Rule & Old Input
+
+**Question:** Write code for a User Registration form with fields: `username` (must be uppercase via a custom rule class), `email` (required, unique in database), `password` (required, min 8 characters, confirmed). Ensure the form repopulates old inputs and renders inline error messages.
+
+**Step 1: Create Custom Rule (`app/Rules/Uppercase.php`)**
+```php
+namespace App\Rules;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
+
+class Uppercase implements ValidationRule
+{
+    public function validate(string $attribute, mixed $value, Closure $fail): void
+    {
+        if (strtoupper($value) !== $value) {
+            $fail("The :attribute field must be strictly uppercase.");
+        }
+    }
+}
+```
+
+**Step 2: Create Form Request (`app/Http/Requests/RegisterRequest.php`)**
+```php
+namespace App\Http\Requests;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Uppercase;
+
+class RegisterRequest extends FormRequest
+{
+    public function authorize() { return true; }
+    
+    public function rules()
+    {
+        return [
+            'username' => ['required', 'string', 'min:3', new Uppercase],
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+        ];
+    }
+}
+```
+
+**Step 3: Controller methods (`app/Http/Controllers/RegisterController.php`)**
+```php
+namespace App\Http\Controllers;
+use App\Http\Requests\RegisterRequest;
+use App\Models\User;
+
+class RegisterController extends Controller
+{
+    public function show() { return view('auth.register'); }
+    
+    public function store(RegisterRequest $request)
+    {
+        User::create([
+            'name' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        return redirect('/login')->with('status', 'Registration Successful!');
+    }
+}
+```
+
+**Step 4: View (`resources/views/auth/register.blade.php`)**
+```blade
+<form method="POST" action="/register">
+    @csrf
+    <div>
+        <label>Username (Strictly Uppercase):</label>
+        <input type="text" name="username" value="{{ old('username') }}">
+        @error('username') <span style="color:red">{{ $message }}</span> @enderror
+    </div>
+    
+    <div>
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ old('email') }}">
+        @error('email') <span style="color:red">{{ $message }}</span> @enderror
+    </div>
+    
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password">
+        @error('password') <span style="color:red">{{ $message }}</span> @enderror
+    </div>
+    
+    <div>
+        <label>Confirm Password:</label>
+        <input type="password" name="password_confirmation">
+    </div>
+    
+    <button type="submit">Register</button>
+</form>
+```
+
+---
+
+### 🎯 Q8: File Upload with Public Disk Storage & Session Alert
+
+**Question:** Implement a profile picture upload system. Write a controller action that accepts an uploaded image from input `avatar`, validates it is an image of max 2MB, generates a unique file name, and stores it in the `public` storage disk under the `avatars` directory. Redirect back showing the stored image using a session success key.
+
+**Controller Action:**
+```php
+use Illuminate\Http\Request;
+
+public function upload(Request $request)
+{
+    $request->validate([
+        'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    if ($request->hasFile('avatar')) {
+        $file = $request->file('avatar');
+        $filename = 'avatar_' . time() . '.' . $file->getClientOriginalExtension();
+        
+        // Save file in storage/app/public/avatars/
+        $path = $file->storeAs('avatars', $filename, 'public');
+
+        return back()->with([
+            'status' => 'Avatar uploaded successfully!',
+            'avatar_url' => asset('storage/' . $path)
+        ]);
+    }
+    return back()->withErrors('File upload failed.');
+}
+```
+
+**Blade rendering:**
+```blade
+@if(session('status'))
+    <div class="alert alert-success">{{ session('status') }}</div>
+    <img src="{{ session('avatar_url') }}" alt="Avatar" style="width:100px; height:100px;">
+@endif
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="avatar">
+    <button type="submit">Upload</button>
+</form>
+```
+
+---
+
+### 🎯 Q9: Eloquent Schema Migrations, Database Seeding, and REST API CRUD Endpoint
+
+**Question:** Write database schema migration code for a `Product` table containing `id`, `name` (string), `price` (decimal, 8,2), and timestamps. Write a Database Seeder that populates 3 product items. Implement a JSON API REST Controller endpoint for showing and deleting an individual book from the database.
+
+**Step 1: Database Migration (`database/migrations/xxxx_create_products_table.php`)**
+```php
+public function up()
+{
+    Schema::create('products', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->decimal('price', 8, 2);
+        $table->timestamps();
+    });
+}
+```
+
+**Step 2: Database Seeder (`database/seeders/ProductSeeder.php`)**
+```php
+namespace Database\Seeders;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class ProductSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('products')->insert([
+            ['name' => 'Book A', 'price' => 299.00, 'created_at' => now()],
+            ['name' => 'Book B', 'price' => 399.00, 'created_at' => now()],
+            ['name' => 'Book C', 'price' => 499.00, 'created_at' => now()],
+        ]);
+    }
+}
+```
+
+**Step 3: REST API Controller Actions (`app/Http/Controllers/Api/BookApiController.php`)**
+```php
+namespace App\Http\Controllers\Api;
+use App\Http\Controllers\Controller;
+use App\Models\Book;
+
+class BookApiController extends Controller
+{
+    // Retrieve individual Book (GET /api/books/{id})
+    public function show($id)
+    {
+        $book = Book::find($id);
+        if (!$book) {
+            return response()->json(['success' => false, 'message' => 'Book not found'], 404);
+        }
+        return response()->json(['success' => true, 'data' => $book], 200);
+    }
+
+    // Delete Book (DELETE /api/books/{id})
+    public function destroy($id)
+    {
+        $deleted = Book::destroy($id);
+        if (!$deleted) {
+            return response()->json(['success' => false, 'message' => 'Book not found'], 404);
+        }
+        return response()->json(['success' => true, 'message' => 'Book deleted successfully.'], 200);
+    }
+}
 ```
 
 ---
