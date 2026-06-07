@@ -52,3 +52,43 @@ php artisan --version
 
 ### Q15: What is the role of `bootstrap/app.php`?
 **Answer:** It configures the Laravel application, registers core kernels, defines routing files, and registers middleware pipelines.
+
+### Q16: What is Laravel and what pattern does it follow?
+**Answer:** Laravel is an open-source PHP framework designed for web application development following the MVC (Model-View-Controller) architectural pattern.
+
+### Q17: What happens if the `vendor/` folder is deleted from your project? How do you restore it?
+**Answer:** If the `vendor/` folder is deleted, the application will not work since all third-party libraries and framework source files are missing. You can restore it by running:
+```bash
+composer install
+```
+This reads the packages and exact versions listed in `composer.lock` and redownloads them.
+
+### Q18: What is the shortcut command to create a Model, its Migration, and a Controller all at once?
+**Answer:** Run the command:
+```bash
+php artisan make:model ModelName -mc
+```
+This generates the Model, a migration file, and a Controller in a single step.
+
+### Q19: Where is the `artisan` script file located, and from where must you run Artisan commands?
+**Answer:** The `artisan` script is located in the root directory of your Laravel project. You must run all Artisan commands from the project root; otherwise, you will get a "Could not open input file: artisan" error.
+
+### Q20: Where are Controllers, Views, and Migration files stored in a Laravel project?
+**Answer:**
+*   **Controllers**: Stored in `app/Http/Controllers/`.
+*   **Views (Blade Templates)**: Stored in `resources/views/`.
+*   **Migrations**: Stored in `database/migrations/`.
+
+### Q21: What command do you run to list all registered URL routes in the application?
+**Answer:**
+```bash
+php artisan route:list
+```
+
+### Q22: What should you do if a route change is not registering in the browser?
+**Answer:** This is usually due to route caching. You should clear the route cache by running:
+```bash
+php artisan route:clear
+```
+Or reset all configurations and caches via `php artisan optimize:clear`.
+
