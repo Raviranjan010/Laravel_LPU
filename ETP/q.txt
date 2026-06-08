@@ -1,0 +1,4 @@
+define a route group with the prefix/home/dataa in web.php.Inside this group , create the following routes
+/home/data/fibonacci Display the first 10 numbers of the fibonacci series using loop
+/home/data/factorial/{nums} Calculate and display the factorial of the given number .
+Display the result in blaade views
